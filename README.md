@@ -15,6 +15,10 @@ To run this, you will need the following:
 - Python 3 (Developed using Python 3.9.13)
 - Latex distribution (Recommended to also use PDFLatex since it allows for convinient PDF generation)
 
+## How to Use
+
+You only need to open **Tex.py**. Only modify the **questions** variable to change the number of questions for each category OR removing or adding new question types.
+
 ## Types of Questions
 
 All the question files use **Question** as an Interface. This means that each question class must have the following:

@@ -1,24 +1,16 @@
-import random
+from RandomNumber import randomInt
 
-
-
-def randomInt():
-    high = 8
-    low = -8
-    i = random.randrange(low, high + 1)
-    return i if i != 0 else randomInt()
-
-def quadratic(num_questions):
+def quadratic(num_questions, low = -8, high = 8):
     questions = []
     printed_str = ""
     for i in range(num_questions):
         a, b, c = 0, 0, 0
         
         while True:
-            val1 = randomInt()
-            val2 = randomInt()
-            val3 = randomInt()
-            val4 = randomInt()
+            val1 = randomInt(low, high)
+            val2 = randomInt(low, high)
+            val3 = randomInt(low, high)
+            val4 = randomInt(low, high)
 
 
             a = val1 * val2

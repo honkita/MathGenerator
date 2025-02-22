@@ -1,4 +1,6 @@
 from Quadratic import quadratic
+from RationalLowerNumerator import rational_lower_numerator
+from RationalSame import rational_same
 
 beginning = """
 \\documentclass{article}
@@ -42,10 +44,18 @@ def usePackage(package: str, prefix = ""):
     return "\\usepackage" + ("" if prefix == "" else "[" + prefix + "]") + "{" + package + "}\n"
 
 
-with open("Output.tex", "w") as text_file:
+filename = "Output.tex"
+folder = "./files/"
+
+with open(folder + filename, "w") as text_file:
     packages = ""
     for package in normal_packages:
         packages = packages + usePackage(package)
     for (prefix, package) in prefix_packages:
         packages = packages + usePackage(package, prefix)
-    text_file.write(beginning + packages + beginning_commands + quadratic(100) + ending)
+    text_file.write(
+        beginning + 
+        packages + 
+        beginning_commands + 
+        quadratic(300) + rational_lower_numerator(300) + 
+        ending)

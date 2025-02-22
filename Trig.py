@@ -1,15 +1,11 @@
 import random
-
-def randomInt(zero = False):
-    high = 8
-    low = -8
-    i = random.randrange(low, high + 1)
-    return i if i != 0 or zero else randomInt()
+from RandomNumber import randomInt
+from Question import Question
 
 def randomTrig():
-    trig_functions = ["sin", "cos", "tan", "csc", "sec", "cot"]
-    i = random.randrange(0, len(trig_functions))
-    return trig_functions[i]
+        trig_functions = ["sin", "cos", "tan", "csc", "sec", "cot"]
+        i = random.randrange(0, len(trig_functions))
+        return trig_functions[i]
 
 def randomK():
     sign = [ "", "-"]
@@ -58,32 +54,37 @@ def phaseShift():
     i = random.randrange(0, len(k))
     return sign[j] + k[i]
 
-def main():
-    questions = []
-    for i in range(100):
-        
-        while True:
-            a = randomInt()
-            a_sign = "" if a >= 0 else "-" 
-            trig = randomTrig()
-            k = randomK()
-            ps = phaseShift()
-            c = randomInt(True)
-            c_sign = " + " if c > 0 else (" - " if c < 0 else "")  
-            
-            current_question = [a, trig, k, ps, c]
-            if current_question not in questions:
-                questions.append(current_question)
-                print(str(i + 1) + ". \\(f(x) = " + 
-                      a_sign + str(abs(a) if abs(a) != 1 else "") + 
-                      "\\" + trig + "(" + 
-                      k + ps +
-                      ")" + 
-                      c_sign + str(abs(c) if abs(c) != 0 else "") + 
-                    "\\) \\\\")
-                break
-        
-        
-        
+class Trig(Question):
+    def name():
+        return "Trigonometry"
 
-main()
+    def description():
+        return "Sketch the graphs and determine the amplitude, peak (max), trough (min), phase shift, vertical shift, period, and x-scale."
+
+    def generator(num_questions, low = -8, high = 8):
+        questions = []
+        printed_str = ""
+        for i in range(num_questions):
+            
+            while True:
+                a = randomInt(low, high)
+                a_sign = "" if a >= 0 else "-" 
+                trig = randomTrig()
+                k = randomK()
+                ps = phaseShift()
+                c = randomInt(low, high, True)
+                c_sign = " + " if c > 0 else (" - " if c < 0 else "")  
+                
+                current_question = [a, trig, k, ps, c]
+                if current_question not in questions:
+                    questions.append(current_question)
+                    printed_str = printed_str + "\t" + (str(i + 1) + ". \\(f(x) = " + 
+                        a_sign + str(abs(a) if abs(a) != 1 else "") + 
+                        "\\" + trig + "(" + 
+                        k + ps +
+                        ")" + 
+                        c_sign + str(abs(c) if abs(c) != 0 else "") + 
+                        "\\) \\\\\n")
+                    break
+        return printed_str   
+            

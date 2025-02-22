@@ -1,6 +1,11 @@
-from Quadratic import quadratic
-from RationalLowerNumerator import rational_lower_numerator
-from RationalSame import rational_same
+"""
+Imports for all different types of questions
+"""
+import Question
+from Quadratic import Quadratic
+from RationalLowerNumerator import RationalLowerNumerator
+from RationalSame import RationalSame
+from Trig import Trig
 
 beginning = """
 \\documentclass{article}
@@ -12,15 +17,21 @@ beginning_commands = """
 \\setlength{\\parindent}{0pt}
 % Used to disable overfill notifications for hbox
 \\begin{document}
-\\begin{multicols*}{2}
+"""
+
+beginning_multicols = """
+    \\begin{multicols*}{2}
     \\baselineskip=8\\baselineskip
     \\hfuzz=20pt 
     % Used to disable centering problems
     \\hbadness = 10000
 """
 
+ending_multicols = """
+    \\end{multicols*}
+"""
+
 ending = """
-\\end{multicols*}
 \\end{document}
 """
 
@@ -40,9 +51,13 @@ prefix_packages = [
     ("sfdefault,lf", "carlito")
     ]
 
-def usePackage(package: str, prefix = ""):
+def use_package(package: str, prefix = ""):
     return "\\usepackage" + ("" if prefix == "" else "[" + prefix + "]") + "{" + package + "}\n"
 
+def module_parser(module: Question, question_count = 100):
+    return "\\section*{"+ module.name()+ "}\n" + module.description() + beginning_multicols + module.generator(question_count) + ending_multicols
+    
+module_parser(Quadratic)
 
 filename = "Output.tex"
 folder = "./files/"
@@ -50,12 +65,15 @@ folder = "./files/"
 with open(folder + filename, "w") as text_file:
     packages = ""
     for package in normal_packages:
-        packages = packages + usePackage(package)
+        packages = packages + use_package(package)
     for (prefix, package) in prefix_packages:
-        packages = packages + usePackage(package, prefix)
+        packages = packages + use_package(package, prefix)
     text_file.write(
         beginning + 
         packages + 
         beginning_commands + 
-        quadratic(300) + rational_lower_numerator(300) + 
+        module_parser(Quadratic) + 
+        module_parser(RationalLowerNumerator) +
+        module_parser(RationalSame) +
+        module_parser(Trig) +
         ending)

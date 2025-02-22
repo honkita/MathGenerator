@@ -8,6 +8,13 @@
 
 This application generates a Latex file with randomly generated questions, which varies from Quadratic factoring and Rational function questions.
 
+## Prerequisites to Run
+
+To run this, you will need the following:
+
+- Python 3 (Developed using Python 3.9.13)
+- Latex distribution (Recommended to also use PDFLatex since it allows for convinient PDF generation)
+
 ## Types of Questions
 
 All the question files use **Question** as an Interface. This means that each question class must have the following:

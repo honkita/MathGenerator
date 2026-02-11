@@ -2,7 +2,7 @@
 
 # MathGen
 
-![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg)
+![](https://raw.githubusercontent.com/honkita/PixelButtons/main/Pixel_Maintained.svg) ![](https://raw.githubusercontent.com/honkita/PixelIcons/main/Languages/Python.svg) ![](https://raw.githubusercontent.com/honkita/PixelIcons/main/Languages/Latex.svg)
 
 ---
 
